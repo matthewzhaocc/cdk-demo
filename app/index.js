@@ -22,6 +22,11 @@ app.post("/new", async (req, res) => {
   await res.json({ token: token });
 });
 
+// index route
+app.get('/', async (req, res) => {
+    res.send('Healthy!')
+})
+
 // redirect route
 app.get("/:url", async (req, res) => {
   await res.redirect(memoryDb.get(req.params.url));
