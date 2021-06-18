@@ -7,12 +7,12 @@ export class DeployStackCdkDemo extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
     const dnsZone = route53.HostedZone.fromHostedZoneAttributes(this, 'dnsZone', {
-      zoneName: 'demo.lhl.lol',
-      hostedZoneId: 'Z1004606KSH6IIDAVC04'
+      zoneName: 'acgdemo.lhl.lol',
+      hostedZoneId: 'Z03326323P2H9ZQLWW45L'
     })
     const cert = new certManager.Certificate(this, 'democert', {
       validation: certManager.CertificateValidation.fromDns(dnsZone),
-      domainName: 'demo.lhl.lol'
+      domainName: 'acgdemo.lhl.lol'
     })
     const appService = new ecsPatterns.ApplicationLoadBalancedFargateService(this, 'appService', {
       memoryLimitMiB: 512,
@@ -25,7 +25,7 @@ export class DeployStackCdkDemo extends cdk.Stack {
       },
       desiredCount: 1,
       domainZone: dnsZone,
-      domainName: "demo.lhl.lol",
+      domainName: "acgdemo.lhl.lol",
       certificate: cert
     })
   }
